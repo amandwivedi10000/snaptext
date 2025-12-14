@@ -1,17 +1,16 @@
 "use client";
+import { useUpload } from "@/contexts/upload-context";
 import { cn } from "@/lib/utils";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
 
-type HeroDropBoxProps = {
-  onSelectFile: (file: File) => void;
-};
+export default function HeroDropBox() {
 
-export default function HeroDropBox({ onSelectFile }: HeroDropBoxProps) {
+  const { handleFileChange } = useUpload()
 
   const onDrop = (acceptedFiles: File[]) => {
     const file: File = acceptedFiles[0];
-    if (file) onSelectFile(file);
+    if (file) handleFileChange(file);
   }
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
