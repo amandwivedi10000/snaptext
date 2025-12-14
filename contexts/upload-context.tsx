@@ -32,11 +32,12 @@ export function UploadProvider({ children }: { children: React.ReactNode }) {
       setExtractedText("")
       setImagePreview(null)
       setIsLoading(true)
-      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       setImagePreview(URL.createObjectURL(file))
+      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
 
       const { data: { text } } = await Tesseract.recognize(file, "eng")
 
+      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       setExtractedText(text)
       setIsLoading(false)
 
