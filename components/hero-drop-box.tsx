@@ -1,5 +1,4 @@
 "use client";
-//TODO: transtion on drop hover not working at the same time. call Aditya.
 import { cn } from "@/lib/utils";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
