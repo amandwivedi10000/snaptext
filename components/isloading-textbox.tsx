@@ -1,7 +1,9 @@
+import { Skeleton } from "./ui/skeleton";
+
 export default function IsLoadingTextBox() {
   return (
-    <div className="mt-6">
-      <p className="text-center text-xl text-gray-600 w-[600px]">Extracting text ...</p>
+    <div className="w-[700px] mt-6">
+      <Skeleton className="h-[250px] w-full rounded-xl bg-blue-200" />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Tesseract from "tesseract.js";
 import HeroDropBox from "./hero-drop-box";
 import HeroText from "./hero-text";
@@ -11,20 +11,33 @@ export default function Hero() {
   const [extractedText, setExtractedText] = useState("")
   const [isloading, setIsLoading] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const resultRef = useRef<HTMLDivElement | null>(null);
+  const dropBoxRef = useRef<HTMLDivElement | null>(null);
 
   const handleFileChange = async (file: File) => {
     try {
+      if (!file) return
+      setExtractedText("")
+      setImagePreview(null)
       setIsLoading(true)
+      setImagePreview(URL.createObjectURL(file))
+
       const { data: { text } } = await Tesseract.recognize(file, "eng")
 
-      setImagePreview(URL.createObjectURL(file))
       setExtractedText(text)
       setIsLoading(false)
+
+      if (resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     } catch (error) {
       console.error(error)
     }
   }
   const handleClear = () => {
+    if (dropBoxRef.current) {
+      dropBoxRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
     setExtractedText("")
     setIsLoading(false)
     setImagePreview(null)
@@ -33,17 +46,22 @@ export default function Hero() {
     <div className="w-full h-auto flex flex-col items-center bg-blue-100/40">
       <HeroText />
       <div className="mt-8 mb-30">
-        <HeroDropBox onSelectFile={handleFileChange} />
-        {isloading && <IsLoadingTextBox />}
-        {extractedText && imagePreview &&
-          (
-            <ExtractedResultCard
-              imagePreview={imagePreview}
-              extractedText={extractedText}
-              handleClear={handleClear}
-            />
-          )
-        }
+        <div ref={dropBoxRef}>
+          <HeroDropBox onSelectFile={handleFileChange} />
+        </div>
+
+        <div ref={resultRef}>
+          {isloading && <IsLoadingTextBox />}
+          {!isloading && extractedText && imagePreview &&
+            (
+              <ExtractedResultCard
+                imagePreview={imagePreview}
+                extractedText={extractedText}
+                handleClear={handleClear}
+              />
+            )
+          }
+        </div>
       </div>
     </div>
   )
