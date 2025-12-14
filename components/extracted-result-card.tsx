@@ -35,7 +35,7 @@ export default function ExtractedResultCard({ imagePreview, extractedText, handl
         </Button>
 
         <Button
-          className="px-4 py-2 ml-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition"
+          className="px-4 py-2 ml-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition cursor-pointer"
           onClick={handleClear}
         >
           Clear

@@ -36,7 +36,7 @@ export default function Hero() {
   }
   const handleClear = () => {
     if (dropBoxRef.current) {
-      dropBoxRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      dropBoxRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
     setExtractedText("")
     setIsLoading(false)
