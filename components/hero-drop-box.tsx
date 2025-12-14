@@ -39,7 +39,7 @@ export default function HeroDropBox() {
       {...getRootProps()}
       className={
         cn(
-          "w-[700px] h-[300px] rounded-xl flex flex-col items-center justify-center border-3 border-dashed border-blue-300 bg-blue-100/25 hover:shadow-lg transition group cursor-pointer",
+          "w-full max-w-[700px] h-[220px] sm:h-[300px] rounded-xl flex flex-col items-center justify-center border-3 border-dashed border-blue-300 bg-blue-100/25 hover:shadow-lg transition group cursor-pointer",
           isDragActive && "bg-blue-500  text-white"
         )}
     >
@@ -51,7 +51,7 @@ export default function HeroDropBox() {
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className="size-8"
+          className="size-7 sm:size-8"
         >
           <path
             strokeLinecap="round"
@@ -61,9 +61,9 @@ export default function HeroDropBox() {
         </svg>
       </div>
 
-      <div className="ml-4 flex flex-col items-center mt-2">
-        <p className="text-lg">Drop your screenshot here</p>
-        <p className={cn("text-gray-400 mt-1",
+      <div className="flex flex-col items-center mt-3 text-center">
+        <p className="text-base sm:text-lg">Drop your screenshot here</p>
+        <p className={cn("text-gray-400 mt-1 text-sm sm:text-base",
           isDragActive && "text-white"
         )} >
           Supported: PNG, JPG, JPEG • Max 5MB

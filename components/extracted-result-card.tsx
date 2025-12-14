@@ -10,16 +10,23 @@ export default function ExtractedResultCard() {
   const { imagePreview, extractedText, handleClear } = useUpload()
 
   return (
-    <Card className="w-[700px] h-auto bg-blue-100/50 backdrop-blur-sm shadow-sm p-6 rounded-xl border border-blue-200 mt-8">
+    <Card className="w-full max-w-[700px] bg-blue-100/50 backdrop-blur-sm shadow-sm sm:p-6 rounded-xl border border-blue-200 mt-8">
       <CardHeader>
-        <CardTitle className="text-lg font-medium text-gray-700 pl-1">
+        <CardTitle className="text-lg font-medium text-gray-700 ">
           Extracted Text
         </CardTitle>
       </CardHeader>
 
       <CardContent className="flex flex-col items-center gap-4">
-        <img src={imagePreview ?? ""} alt="Preview" className="w-[300px] rounded-lg border border-blue-300 mb-4 shadow-sm overflow-hidden" />
-        <Textarea readOnly value={extractedText} className="w-full h-[300px] p-4 border-2 rounded-xl border-blue-300 bg-blue-100/25" />
+
+        <img
+          src={imagePreview ?? ""}
+          alt="Preview"
+          className="w-full max-w-[300px] rounded-lg border border-blue-300 mb-2 shadow-sm overflow-hidden" />
+        <Textarea
+          readOnly
+          value={extractedText}
+          className="w-full h-[200px] sm:h-[300px] p-4 border-2 rounded-xl border-blue-300 bg-blue-100/25" />
       </CardContent>
 
       <CardFooter className="flex ">
