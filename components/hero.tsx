@@ -17,6 +17,9 @@ export default function Hero() {
   const handleFileChange = async (file: File) => {
     try {
       if (!file) return
+      if (resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
       setExtractedText("")
       setImagePreview(null)
       setIsLoading(true)
@@ -27,9 +30,6 @@ export default function Hero() {
       setExtractedText(text)
       setIsLoading(false)
 
-      if (resultRef.current) {
-        resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
     } catch (error) {
       console.error(error)
     }
@@ -52,16 +52,16 @@ export default function Hero() {
 
         <div ref={resultRef}>
           {isloading && <IsLoadingTextBox />}
-          {!isloading && extractedText && imagePreview &&
-            (
-              <ExtractedResultCard
-                imagePreview={imagePreview}
-                extractedText={extractedText}
-                handleClear={handleClear}
-              />
-            )
-          }
         </div>
+        {!isloading && extractedText && imagePreview &&
+          (
+            <ExtractedResultCard
+              imagePreview={imagePreview}
+              extractedText={extractedText}
+              handleClear={handleClear}
+            />
+          )
+        }
       </div>
     </div>
   )
